@@ -1,0 +1,57 @@
+<div class="card text-white bg-secondary mb-3" 
+    style="max-width: 100%; margin-top: 10px;">
+        <div class="card-body">
+        <div class="card-title container">
+            <h4 class="card-title title">Add Task</h4>
+            <i class="material-icons back" (click)="collapseForm()">arrow_back</i>
+        </div>
+        <hr style="border-color:white; border-style:solid;">
+            <div class="form-group">
+                <label for="taskTitle">Title</label>
+                <input type="text" class="form-control" 
+                        id="taskTitle" 
+                        aria-describedby="taskTitle" 
+                        placeholder="Enter task title"
+                        autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="taskDefinition">Description</label>
+                <textarea class="form-control" id="taskDefinition" rows="3"
+                placeholder="Describe task"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="selectState">State</label>
+                <select class="form-control" id="selectState">
+                    <option *ngFor="let state of states">{{state}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <app-chip-input 
+                    [options]="possibleTags" 
+                    [inputPlaceholder]="'Input tags'"
+                    (emitSelectedOpts)="fillSelectedOptions($event)">
+                        <small style="color:white; padding-left: 10px">
+                            press enter after each tag
+                        </small>
+                </app-chip-input>
+            </div>
+
+            <div class="form-group">
+                <label for="tags">Assignee(s)</label>
+                <app-chip-input 
+                    [options]="possibleUsers" 
+                    [inputPlaceholder]="'Input assignees'"
+                    (emitSelectedOpts)="fillSelectedOptions($event)">
+                        <small style="color:white; padding-left: 8px; padding-top: 0px">
+                            press enter after each assignee
+                        </small>
+                </app-chip-input>
+            </div>
+
+            <button type="button" class="btn btn-secondary btn-lg btn-block sbmt-btn">Submit</button>
+        </div>
+  </div>

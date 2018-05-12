@@ -1,0 +1,40 @@
+
+
+<input  type="text" 
+        class="form-control" 
+        id="tag-input" 
+        aria-describedby="tags" 
+        [placeholder]="helperPlaceHolder" 
+        (keyup)="showOpts($event)" 
+        (blur)="hideOpts()" 
+        [(ngModel)]="inputValue"
+        #input
+        >
+
+<!-- AUTOCOMPLETE OPTIONS  -->
+<div *ngIf="areOptsVisible"
+     class="options-bg"
+     (mouseenter)="removeHoverClass()"
+     #optionsElem
+     >
+      <div *ngFor="let option of filteredOpts" 
+            class="options" 
+            (mousedown)="selectOption(option)">
+            {{option}}
+      </div>
+</div>
+
+<ng-content></ng-content>
+
+<!-- LIST OF SELECTED OPTIONS -->
+<div *ngIf="chips.length > 0">
+    <div class="flex-container">
+        <div class="chip" *ngFor="let chip of chips">
+            <span>{{chip}}</span>
+            <i class="material-icons chip-remove" 
+                style="padding-left: 10px"
+                (click)="removeChip(chip)"
+            >cancel</i>
+        </div>
+    </div>
+</div>

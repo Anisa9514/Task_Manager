@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  isFormCollapsed : boolean = true;
+
+  toggleForm(){
+    this.isFormCollapsed = !this.isFormCollapsed
+    return this.isFormCollapsed;
+  }
 }

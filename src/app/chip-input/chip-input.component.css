@@ -1,0 +1,81 @@
+.options{
+    color:darkslategrey; 
+    padding: 10px;
+
+}
+
+.options-bg{
+    background-color: white;
+    margin: 0px;
+    
+}
+
+.options-bg :hover, .hover{
+    background-color: #f2d2d3;
+    cursor: pointer;
+    color: white;
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    background-color: rgb(204, 126, 130);
+    border-radius: 15px;
+    padding: 5px;
+
+    max-height: 150px;
+    /* overflow-y: auto; */
+    overflow-y: scroll;
+
+}
+
+.chip{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #f2d2d3;
+    border-radius: 18px; 
+    padding: 5px 10px 5px 10px;
+    margin: 2px;
+    color: slategrey;
+
+    white-space: pre-wrap;      /* CSS3 */   
+    white-space: -moz-pre-wrap; /* Firefox */    
+    white-space: -pre-wrap;     /* Opera <7 */   
+    white-space: -o-pre-wrap;   /* Opera 7 */    
+    word-wrap: break-word;      /* IE */
+}
+
+.chip:hover{
+    background-color: #f8eff0;
+}
+
+.chip-remove:hover{
+    cursor: pointer;
+    color:rgb(172, 184, 196);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white; 
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(245, 177, 180); 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(231, 206, 208);
+    cursor: pointer;
+}
