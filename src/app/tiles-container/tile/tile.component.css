@@ -1,0 +1,9 @@
+.tile{
+    width: 600px;
+    height: 250px;
+    margin: 5px;
+}
+
+.tile .card-header{
+    height: 20%;
+}

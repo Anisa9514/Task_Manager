@@ -12,20 +12,78 @@
                         id="taskTitle" 
                         aria-describedby="taskTitle" 
                         placeholder="Enter task title"
+                        [(ngModel)]="title"
                         autofocus>
             </div>
 
             <div class="form-group">
                 <label for="taskDefinition">Description</label>
-                <textarea class="form-control" id="taskDefinition" rows="3"
-                placeholder="Describe task"></textarea>
+                <textarea class="form-control" 
+                    id="taskDefinition" 
+                    rows="3"
+                    placeholder="Describe task"
+                    [(ngModel)]="description"></textarea>
             </div>
             
             <div class="form-group">
+                <label for="due-date">Due Date</label>
+                <div class="input-group">
+                  <input id="due-date" class="form-control" 
+                        placeholder="yyyy-mm-dd"
+                        name="dp" [(ngModel)]="dueDate" 
+                        ngbDatepicker 
+                        [dayTemplate]="customDay" 
+                        #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary datepicker-btn" 
+                            (click)="d.toggle()" 
+                            type="button">
+                        <i class="material-icons">
+                            calendar_today
+                        </i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <ng-template #customDay let-date="date" 
+                    let-currentMonth="currentMonth" 
+                    let-selected="selected" 
+                    let-disabled="disabled" 
+                    let-focused="focused">
+                         <span class="custom-day" 
+                            [class.focused]="focused"
+                            [class.bg-primary]="selected" 
+                            [class.text-muted]="disabled">
+                                {{ date.day }}
+                        </span>
+              </ng-template>
+
+              <div class="form-group">
+                    <label for="timeEstimate">Estimated Time (Hours)</label>
+                    <input type="number" class="form-control" 
+                        id="taskEstimate" 
+                        aria-describedby="timeEstimate" 
+                        placeholder="Enter time to completion estimate"
+                        [(ngModel)]="timeEstimate">
+            </div>            
+            
+            <div class="form-group">
                 <label for="selectState">State</label>
-                <select class="form-control" id="selectState">
+                <select class="form-control" id="selectState" [(ngModel)]="state">
                     <option *ngFor="let state of states">{{state}}</option>
                 </select>
+            </div>
+
+            <div *ngIf="state == 'In Progress'">
+                    <div class="form-group">
+                            <label for="taskProgress">Estimated Progress (%)</label>
+                            <input type="number" class="form-control" 
+                                id="taskProgress" 
+                                aria-describedby="taskProgress" 
+                                placeholder="Enter progress estimate"
+                                [(ngModel)]="progressEstimate">
+                    </div>                       
             </div>
 
             <div class="form-group">
@@ -33,7 +91,7 @@
                 <app-chip-input 
                     [options]="possibleTags" 
                     [inputPlaceholder]="'Input tags'"
-                    (emitSelectedOpts)="fillSelectedOptions($event)">
+                    (emitSelectedOpts)="fillSelectedTags($event)">
                         <small style="color:white; padding-left: 10px">
                             press enter after each tag
                         </small>
@@ -45,13 +103,17 @@
                 <app-chip-input 
                     [options]="possibleUsers" 
                     [inputPlaceholder]="'Input assignees'"
-                    (emitSelectedOpts)="fillSelectedOptions($event)">
+                    (emitSelectedOpts)="fillSelectedAssignees($event)">
                         <small style="color:white; padding-left: 8px; padding-top: 0px">
                             press enter after each assignee
                         </small>
                 </app-chip-input>
             </div>
 
-            <button type="button" class="btn btn-secondary btn-lg btn-block sbmt-btn">Submit</button>
+            <button type="button" 
+                    class="btn btn-secondary btn-lg btn-block sbmt-btn"
+                    (click)="submitForm()">
+                        Submit
+            </button>
         </div>
   </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TasksService } from '../tasks.service';
+import { Task } from '../task.model';
 
 @Component({
   selector: 'app-tiles-container',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TilesContainerComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private tasksService : TasksService
+  ) { }
+  
+  tasks : Task[];
 
   ngOnInit() {
+    this.tasks = this.tasksService.tasks;
   }
 
 }

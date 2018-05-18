@@ -1,3 +1,5 @@
-<p>
-  tiles-container works!
-</p>
+<div class="wrapper">
+    <div *ngFor="let task of tasks">
+        <app-tile [task]="task"></app-tile>
+      </div>
+</div>

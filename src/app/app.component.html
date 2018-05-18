@@ -1,6 +1,6 @@
 <div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">TASK MANAGER</a>
   </nav>
 
   <div class="container" style="padding-top: 10px">
@@ -9,6 +9,12 @@
         <button  *ngIf="isFormCollapsed"
                   class="btn btn-secondary toggle" 
                   (click)="toggleForm()"
+        ><i class="material-icons">add</i></button>
+
+
+        <button  *ngIf="isFormCollapsed"
+                  class="btn btn-primary toggle" 
+                  (click)="addTask()"
         ><i class="material-icons">add</i></button>
 
         <div class="col-md-4" *ngIf="!isFormCollapsed">

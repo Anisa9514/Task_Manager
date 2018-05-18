@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Task } from '../task.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-add-task-form',
@@ -6,8 +8,18 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./add-task-form.component.css']
 })
 export class AddTaskFormComponent implements OnInit {
+
+  constructor(
+    private tasksService : TasksService
+  ) { }
+
+  ngOnInit() {
+    this.tasks = this.tasksService.tasks;
+  }
+
   @Output('collapse') emitCollapseForm = new EventEmitter(); 
 
+  tasks : Task[];
   states : string[] = [
     'Not Assigned',
     'Not Started',
@@ -29,18 +41,43 @@ export class AddTaskFormComponent implements OnInit {
     'Raphael',
   ]
 
+  // Form Inputs
+  title : string = '';
+  description: string = '';
+  dueDate : {"year" : number, "month" : number, "day" : number};
+  timeEstimate : number;
+  state: string = 'Not Assigned';
+  progressEstimate : number = 0;
   selectedTags: string[] = [];
+  selectedAssignees: string[] = [];
 
-  fillSelectedOptions(tags : string[]){
-    console.log("event emitted and passed");
+  fillSelectedTags(tags : string[]){
     this.selectedTags = tags;
+  }
+
+  fillSelectedAssignees(assignees : string[]){
+    this.selectedAssignees = assignees;
   }
 
   collapseForm(){
     this.emitCollapseForm.emit();
   }
-  constructor() { }
 
-  ngOnInit() {
+  submitForm(){
+
+    let newTask : Task = new Task(
+      this.title,
+      this.description,
+      this.dueDate,
+      this.timeEstimate,
+      this.state,
+      this.progressEstimate,
+      this.selectedTags,
+      this.selectedAssignees
+    )
+
+    this.tasksService.addTask(newTask);
+    this.collapseForm();
   }
+
 }

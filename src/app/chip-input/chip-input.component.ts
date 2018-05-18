@@ -50,7 +50,7 @@ export class ChipInputComponent implements OnInit {
 
     if( key == "Enter"){
       var children = this.optionsElem.nativeElement.children;
-      var val = (this.optIndex != -1) ? children[this.optIndex].textContent : value;
+      var val = (this.optIndex != -1) ? children[this.optIndex].textContent.toLowerCase().trim() : value;
 
       this.optIndex = -1;
       this.selectOption(val);
@@ -100,6 +100,7 @@ export class ChipInputComponent implements OnInit {
       this.chips.push(option);  // only push if not in array
     }
     this.inputValue = '';
+    this.emitSelections();
 
   }
 
@@ -109,11 +110,11 @@ export class ChipInputComponent implements OnInit {
     if(index > -1){
       this.chips.splice(index, 1);
     }
+    this.emitSelections();
   }
 
   // Send selections
   emitSelections(){
-    console.log("selections emitted. " + this.chips);
     this.emitSelectedOpts.emit(this.chips);
   }
 }
