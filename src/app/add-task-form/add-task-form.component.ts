@@ -1,16 +1,37 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, Input } from '@angular/core';
 import { Task } from '../task.model';
 import { TasksService } from '../tasks.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+}from '@angular/animations';
 
 @Component({
   selector: 'app-add-task-form',
   templateUrl: './add-task-form.component.html',
-  styleUrls: ['./add-task-form.component.css']
+  styleUrls: ['./add-task-form.component.css'],
+  animations: [
+    trigger('visibility', [
+      transition(':enter', [
+        style({
+          transform: 'translateX(-100%)',
+        }),
+        animate('0.5s ease-in')
+      ]),
+      transition(':leave', [
+        animate('0.5s ease-out', 
+        style({
+          transform: 'translateX(-100%)',
+        }))
+      ]),
+    ])
+  ]
 })
 export class AddTaskFormComponent implements OnInit {
-
-  @ViewChild('slider') slider : ElementRef;
-
+  @Input() show;
   constructor(
     public el: ElementRef,
     private tasksService : TasksService
@@ -18,7 +39,6 @@ export class AddTaskFormComponent implements OnInit {
 
   ngOnInit() {
     this.tasks = this.tasksService.tasks;
-    console.log(this.slider);
   }
 
   @Output('collapse') emitCollapseForm = new EventEmitter(); 
@@ -38,29 +58,15 @@ export class AddTaskFormComponent implements OnInit {
     'misc'
   ]
 
-  possibleUsers: string[] = [
-    'Anisa',
-    'Isabel',
-    'Albert',
-    'Raphael',
-  ]
-
   // Form Inputs
   title : string = '';
   description: string = '';
   dueDate : {"year" : number, "month" : number, "day" : number};
-  timeEstimate : number;
   state: string = 'Not Assigned';
-  progressEstimate : number = 0;
   selectedTags: string[] = [];
-  selectedAssignees: string[] = [];
 
   fillSelectedTags(tags : string[]){
     this.selectedTags = tags;
-  }
-
-  fillSelectedAssignees(assignees : string[]){
-    this.selectedAssignees = assignees;
   }
 
   collapseForm(){
@@ -72,11 +78,8 @@ export class AddTaskFormComponent implements OnInit {
       this.title,
       this.description,
       this.dueDate,
-      this.timeEstimate,
       this.state,
-      this.progressEstimate,
       this.selectedTags,
-      this.selectedAssignees
     )
 
     this.tasksService.addTask(newTask);

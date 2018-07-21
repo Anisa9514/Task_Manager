@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div [@visibility]="showAddForm" class="wrapper">
     <div *ngFor="let task of tasks">
         <app-tile [task]="task"></app-tile>
       </div>

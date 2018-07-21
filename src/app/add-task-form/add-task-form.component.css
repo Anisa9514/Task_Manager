@@ -1,81 +1,55 @@
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.add-task-form {
+    width: 25%;
+    min-width: 300px;
+    border-radius: 0;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.title{
-    padding-top: 10px;
-}
-.back{
-    border-radius: 50%;
-    padding: 10px;
+.title {
+  padding-top: 10px;
 }
 
-.back:hover{
-    background-color: #EF7479;
-    cursor: pointer;
+.back {
+  border-radius: 50%;
+  padding: 10px;
 }
 
-.sbmt-btn{
-    border-color: white;
+.back:hover {
+  background-color: #EF7479;
+  cursor: pointer;
 }
 
-.datepicker-btn{
-    border-color: white;
+.sbmt-btn {
+  border-color: white;
 }
 
-.custom-day{
-    color: grey;
-    font-size: 90%;
-    text-align: center;
-    padding: 0.185rem 0.25rem;
-    border-radius: 0.25rem;
-    display: inline-block;
-    width: 2rem;
+.datepicker-btn {
+  border-color: white;
 }
 
-.custom-day:hover, .custom-day.focused {
-    background-color: #e6e6e6;
-  }
-
-  .toggle{
-    border-radius: 50%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 50px;
-    height: 50px;
+.custom-day {
+  color: grey;
+  font-size: 90%;
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+  width: 2rem;
 }
 
-#slider {
-    transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
+.custom-day:hover,
+.custom-day.focused {
+  background-color: #e6e6e6;
 }
 
-.slide-in {
-    animation: slide-in 0.5s forwards;
-    -webkit-animation: slide-in 0.5s forwards;
-}
-
-.slide-out {
-    animation: slide-out 0.5s forwards;
-    -webkit-animation: slide-out 0.5s forwards;
-}
-    
-@keyframes slide-in {
-    100% { transform: translateX(0%); }
-}
-
-@-webkit-keyframes slide-in {
-    100% { -webkit-transform: translateX(0%); }
-}
-    
-@keyframes slide-out {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
-}
-
-@-webkit-keyframes slide-out {
-    0% { -webkit-transform: translateX(0%); }
-    100% { -webkit-transform: translateX(-100%); }
+.toggle {
+  border-radius: 50%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 50px;
+  height: 50px;
 }

@@ -1,7 +1,8 @@
 .tile{
     width: 600px;
-    height: 300px;
+    height: 200px;
     margin: 5px;
+    border-radius: 0;
 }
 
 .tile .card-header{
@@ -24,38 +25,7 @@
     flex-flow: column nowrap;
 }
 
-.initials{
-    margin: 2px;
-    padding: 5px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    background-color: rgb(104, 168, 150);
-    border-radius: 50%;
-}
-
 .description{
     height: 80%;
     overflow: auto;
-}
-
-.bottom{
-    margin-top: 10px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.tags{
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    overflow: auto;
-}
-
-.tag{
-    padding: 5px;
-    margin: 2px;
-    background-color: rgb(104, 168, 150);
-    border-radius: 50%;
 }
