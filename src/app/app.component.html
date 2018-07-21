@@ -17,16 +17,11 @@
                   (click)="addTask()"
         ><i class="material-icons">add</i></button>
 
-        <div class="col-md-4" *ngIf="!isFormCollapsed">
-          <!-- <button class="btn btn-secondary toggle"
-                  (click)="toggleForm()"
-                  > 
-                  <i class="material-icons">arrow_back</i>
-          </button> -->
+        <div class="col-md-4" [hidden]="isFormCollapsed">
           <app-add-task-form (collapse)="toggleForm()"></app-add-task-form>
         </div>
       
-        <div class="col-md">
+        <div>
           <app-tiles-container></app-tiles-container>
         </div>
       </div>

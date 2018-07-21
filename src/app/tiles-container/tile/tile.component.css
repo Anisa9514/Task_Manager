@@ -1,9 +1,61 @@
 .tile{
     width: 600px;
-    height: 250px;
+    height: 300px;
     margin: 5px;
 }
 
 .tile .card-header{
     height: 20%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    overflow: auto;
+}
+
+.date-n-init{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+}
+
+.card-body{
+    height: 60%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.initials{
+    margin: 2px;
+    padding: 5px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(104, 168, 150);
+    border-radius: 50%;
+}
+
+.description{
+    height: 80%;
+    overflow: auto;
+}
+
+.bottom{
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tags{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    overflow: auto;
+}
+
+.tag{
+    padding: 5px;
+    margin: 2px;
+    background-color: rgb(104, 168, 150);
+    border-radius: 50%;
 }

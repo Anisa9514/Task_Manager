@@ -1,10 +1,33 @@
 <div class="tile card text-white bg-primary mb-3" style="max-width: 20rem;">
     <div class="card-header">
-      {{task.title}} {{task.id}}
+        <div>{{task.title | uppercase}}</div>
+        <div class="date-n-init">
+            <div *ngIf="task.dueDate != null" style="margin-right: 10px;">{{task.dueDate.month}}/{{task.dueDate.day}}</div>
+            <div *ngIf="task.assignees != null">
+              <span class="initials">
+                {{task.assignees[0] | nameInitials}}
+              </span>
+              <span *ngIf="task.assignees.length > 1" class="initials">
+                ...
+              </span>
+            </div>
+        </div>
     </div>
     <div class="card-body">
-      <p class="card-text">
+      <div class="card-text description">
         {{task.description}}
-      </p>
+      </div>
+      <div class="bottom">
+        <div>
+          <div class="tags" *ngIf="task.tags != null">
+            <span *ngIf="task.tags.length > 0" class="tag">{{task.tags[0] | shorten}}</span>
+            <span *ngIf="task.tags.length > 1" class="tag">{{task.tags[1] | shorten}}</span>
+            <span *ngIf="task.tags.length > 2" class="tag">...</span>
+          </div>
+        </div>
+        <div>
+          <span *ngIf="task.state != 'Not Assigned'">{{task.progressEstimate}} %</span>
+        </div>
+      </div>
     </div>
 </div>

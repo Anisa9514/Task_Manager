@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Task } from '../task.model';
 import { TasksService } from '../tasks.service';
 
@@ -9,12 +9,16 @@ import { TasksService } from '../tasks.service';
 })
 export class AddTaskFormComponent implements OnInit {
 
+  @ViewChild('slider') slider : ElementRef;
+
   constructor(
+    public el: ElementRef,
     private tasksService : TasksService
   ) { }
 
   ngOnInit() {
     this.tasks = this.tasksService.tasks;
+    console.log(this.slider);
   }
 
   @Output('collapse') emitCollapseForm = new EventEmitter(); 
@@ -64,7 +68,6 @@ export class AddTaskFormComponent implements OnInit {
   }
 
   submitForm(){
-
     let newTask : Task = new Task(
       this.title,
       this.description,

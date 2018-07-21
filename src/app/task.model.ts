@@ -27,7 +27,7 @@ export class Task{
         this.dueDate = dueDate;
         this.timeEstimateInHours = timeEstimateInHours;
         this.state = state;
-        this.progressEstimate = progressEstimate
+        this.progressEstimate = progressEstimate;
         this.tags = tags;
         this.assignees = assignees;
     }
