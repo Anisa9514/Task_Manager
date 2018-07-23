@@ -21,3 +21,7 @@
     background: rgb(143, 228, 204); 
     cursor: pointer;
 }
+
+* {
+    box-sizing: border-box;
+}

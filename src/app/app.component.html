@@ -3,19 +3,20 @@
     <a class="navbar-brand" href="#">TASK MANAGER</a>
   </nav>
 
-  <div class="toggle-btns">
-    <button *ngIf="isFormCollapsed" class="btn btn-secondary toggle" (click)="toggleForm()">
-      <i class="material-icons">add</i>
-    </button>
-
-    <button *ngIf="isFormCollapsed" class="btn btn-primary toggle" (click)="addTask()">
-      <i class="material-icons">add</i>
-    </button>
-  </div>
-
   <div class="main-content">
+    <div class="toggle-btns">
+      <button *ngIf="isFormCollapsed" class="btn btn-secondary toggle" (click)="toggleForm()">
+        <i class="material-icons">add</i>
+      </button>
+  
+      <button *ngIf="isFormCollapsed" class="btn btn-primary toggle" (click)="addTask()">
+        <i class="material-icons">add</i>
+      </button>
+    </div>
     <app-add-task-form [show]="!isFormCollapsed" (collapse)="toggleForm()"></app-add-task-form>
-    <app-tiles-container [showAddForm]="isFormCollapsed ? 'yes': 'no'"></app-tiles-container>        
+    <div [ngClass]="{'form-expanded': !isFormCollapsed}" class="tiles-wrapper">
+      <app-tiles-container-wrapper></app-tiles-container-wrapper>  
+    </div>      
   </div>
 
 </div>

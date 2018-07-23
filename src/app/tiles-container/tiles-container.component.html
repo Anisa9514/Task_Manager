@@ -1,5 +1,10 @@
-<div [@visibility]="showAddForm" class="wrapper">
+<!-- <div class="wrapper">
     <div *ngFor="let task of tasks">
         <app-tile [task]="task"></app-tile>
-      </div>
+    </div>
+</div> -->
+<div class="tiles-container">
+    <div *ngFor="let task of tasks">
+        <app-tile [task]="task"></app-tile>
+    </div>
 </div>

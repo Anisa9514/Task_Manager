@@ -1,12 +1,14 @@
-.wrapper{
+.tiles-container{
+    box-sizing: border-box;
+    background-color: #e5eae9;
+
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    align-content: flex-start;
-    flex-flow: row wrap;
+    flex-flow: column nowrap;
+    align-items: center;
+    overflow-y: auto;
+    height: 675px;
+    width: 350px;
+    margin: 5px 1em;
 
-    height: 700px;
-    overflow: auto;
-    transform: translateX(75px);
+    position: relative;
 }
-

@@ -12,6 +12,7 @@ import { ChipInputComponent } from './chip-input/chip-input.component';
 import { TileComponent } from './tiles-container/tile/tile.component';
 import { NameInitialsPipe } from './name-initials.pipe';
 import { ShortenPipe } from './shorten.pipe';
+import { TilesContainerWrapperComponent } from './tiles-container-wrapper/tiles-container-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ShortenPipe } from './shorten.pipe';
     TileComponent,
     NameInitialsPipe,
     ShortenPipe,
+    TilesContainerWrapperComponent,
   ],
   imports: [
     BrowserModule,
