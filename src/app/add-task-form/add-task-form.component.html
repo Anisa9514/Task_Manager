@@ -41,7 +41,7 @@
     <div class="form-group">
       <label for="selectState">State</label>
       <select class="form-control" id="selectState" [(ngModel)]="state">
-        <option *ngFor="let state of states">{{state}}</option>
+        <option *ngFor="let state of states; let i = index">{{state}}</option>
       </select>
     </div>
 

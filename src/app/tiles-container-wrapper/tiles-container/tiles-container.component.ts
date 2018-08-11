@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TasksService } from '../tasks.service';
-import { Task } from '../task.model';
 
 @Component({
   selector: 'app-tiles-container',
@@ -19,6 +17,10 @@ export class TilesContainerComponent implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  onDataDrop(e: any) {
+    e.dragData.state = this.title;
   }
 
 }

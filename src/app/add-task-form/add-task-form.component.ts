@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, Input } from '@angular/core';
-import { Task } from '../task.model';
-import { TasksService } from '../tasks.service';
+import { Task } from '../../models/task.model';
+import { TasksService } from '../../services/tasks.service';
 import {
   trigger,
   state,
@@ -45,7 +45,6 @@ export class AddTaskFormComponent implements OnInit {
 
   tasks : Task[];
   states : string[] = [
-    'Not Assigned',
     'Not Started',
     'In Progress',
     'Completed'
@@ -62,7 +61,7 @@ export class AddTaskFormComponent implements OnInit {
   title : string = '';
   description: string = '';
   dueDate : {"year" : number, "month" : number, "day" : number};
-  state: string = 'Not Assigned';
+  state: string = 'Not Started';
   selectedTags: string[] = [];
 
   fillSelectedTags(tags : string[]){

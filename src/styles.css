@@ -25,3 +25,40 @@
 * {
     box-sizing: border-box;
 }
+
+
+/* Draggable*/
+
+.drag-border {
+    border: #95eec9 dashed 4px;
+    background-color: #a6e4d4 !important;
+}
+
+.drag-handle {
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.drag-handle:active { 
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+    opacity: 1;
+}
+
+/* Droppable */
+
+.drag-hint-border {
+    border: #929e9b dashed 4px;
+}
+
+.drag-over-border {
+    border: #EF7479 dashed 4px;
+}
+
+.drag-transit {
+    border: #74bca8 dashed 4px;
+    background-color: #74bca8 !important;
+}

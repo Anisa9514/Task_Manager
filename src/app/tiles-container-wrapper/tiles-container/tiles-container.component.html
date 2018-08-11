@@ -1,0 +1,4 @@
+<h3 class="title">{{title}}</h3>
+<div droppable (onDrop)="onDataDrop($event)" class="tiles-container">
+  <app-tile *ngFor="let task of tasks" [task]="task"></app-tile>
+</div>

@@ -14,9 +14,10 @@
       </button>
     </div>
     <app-add-task-form [show]="!isFormCollapsed" (collapse)="toggleForm()"></app-add-task-form>
-    <div [ngClass]="{'form-expanded': !isFormCollapsed}" class="tiles-wrapper">
+    <div class="tiles-wrapper">
       <app-tiles-container-wrapper></app-tiles-container-wrapper>  
     </div>      
   </div>
 
 </div>
+\

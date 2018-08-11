@@ -5,14 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
-import { TilesContainerComponent } from './tiles-container/tiles-container.component';
+import { TilesContainerComponent } from './tiles-container-wrapper/tiles-container/tiles-container.component';
 
 import { FormsModule } from '@angular/forms';
 import { ChipInputComponent } from './chip-input/chip-input.component';
-import { TileComponent } from './tiles-container/tile/tile.component';
-import { NameInitialsPipe } from './name-initials.pipe';
-import { ShortenPipe } from './shorten.pipe';
+import { TileComponent } from './tiles-container-wrapper/tiles-container/tile/tile.component';
+import { NameInitialsPipe } from '../pipes/name-initials.pipe';
+import { ShortenPipe } from '../pipes/shorten.pipe';
 import { TilesContainerWrapperComponent } from './tiles-container-wrapper/tiles-container-wrapper.component';
+import { NgDragDropModule } from 'ng-drag-drop';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { TilesContainerWrapperComponent } from './tiles-container-wrapper/tiles-
     BrowserAnimationsModule,
     FormsModule,
     NgbModule.forRoot(),
+    NgDragDropModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

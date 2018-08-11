@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TasksService } from '../tasks.service';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-tiles-container-wrapper',
@@ -14,7 +14,7 @@ export class TilesContainerWrapperComponent implements OnInit {
     this.tasks = this.tasksService.tasks;
   }
 
-  public getTasks(){
-    return this.tasks;
+  public getTasks(state: string){
+    return this.tasks.filter((task) => task.state === state);
   }
 }

@@ -3,6 +3,8 @@
     min-width: 300px;
     border-radius: 0;
     flex: 1 0 auto;
+    position: absolute;
+    z-index: 5;
 }
 .container {
   display: flex;
@@ -30,6 +32,10 @@
 
 .datepicker-btn {
   border-color: white;
+}
+
+#due-date {
+  padding: 1.4rem;
 }
 
 .custom-day {
