@@ -8,40 +8,33 @@ import { Task } from '../models/task.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  tasks: Task[] = [];
   title = 'app';
   isFormCollapsed : boolean = true;
 
   constructor(
     private tasksService : TasksService
   ){}
+
+  ngOnInit(){
+    this.fetchTasks();
+  }
+
+  fetchTasks(){
+    this.tasksService.getAllTasks().subscribe(
+      (res) => {this.tasks = res;}
+     )
+  }
   toggleForm(){
     this.isFormCollapsed = !this.isFormCollapsed
     return this.isFormCollapsed;
   }
 
   addTask(){
-    let task = new Task(
-      'Task Title',
-      `Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-      reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
-      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-      culpa qui officia deserunt mollit anim id est laborum.`,
-      {"year" : 2018, "month" : 5, "day" : 26},
-      'In Progress',
-      ['tag1','tag2','tag3'],
-    );
+   
+  }
 
-    let task2 = new Task(
-      'Really Long Task Title',
-      `Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-      {"year" : 2018, "month" : 5, "day" : 26},
-      'In Progress',
-      ['Hello World I will go','These should be','These shou', 'Hello'],
-    );
-    this.tasksService.addTask(task2);
+  getTasks(){
+    this.tasksService.getAllTasks().subscribe();
   }
 }

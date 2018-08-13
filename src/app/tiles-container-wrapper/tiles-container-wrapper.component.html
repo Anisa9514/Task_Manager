@@ -1,10 +1,10 @@
 <div class="wrapper">
-  <app-tiles-container [title]="'Not Started'" [tasks]="getTasks('Not Started')">
+  <app-tiles-container [title]="'Not Started'" [tasks]="filterTasksByState('Not Started')">
   </app-tiles-container>
 
-  <app-tiles-container [title]="'In Progress'" [tasks]="getTasks('In Progress')">
+  <app-tiles-container [title]="'In Progress'" [tasks]="filterTasksByState('In Progress')">
   </app-tiles-container>
 
-  <app-tiles-container [title]="'Completed'" [tasks]="getTasks('Completed')">
+  <app-tiles-container [title]="'Completed'" [tasks]="filterTasksByState('Completed')">
   </app-tiles-container>
 </div>

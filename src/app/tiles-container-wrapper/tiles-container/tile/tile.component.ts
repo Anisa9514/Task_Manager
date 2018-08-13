@@ -6,12 +6,9 @@ import { Task } from '../../../../models/task.model';
   templateUrl: './tile.component.html',
   styleUrls: ['./tile.component.css']
 })
-export class TileComponent implements OnInit {
+export class TileComponent{
   @Input() task : Task;
-  
-  constructor() { }
 
-  ngOnInit() {
-  }
+  constructor() { }
 
 }

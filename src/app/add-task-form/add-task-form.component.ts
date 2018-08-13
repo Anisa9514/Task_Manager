@@ -3,11 +3,11 @@ import { Task } from '../../models/task.model';
 import { TasksService } from '../../services/tasks.service';
 import {
   trigger,
-  state,
   style,
   animate,
   transition
 }from '@angular/animations';
+import { States } from 'src/app.constants';
 
 @Component({
   selector: 'app-add-task-form',
@@ -19,10 +19,10 @@ import {
         style({
           transform: 'translateX(-100%)',
         }),
-        animate('0.5s ease-in')
+        animate('0.2s ease-in')
       ]),
       transition(':leave', [
-        animate('0.5s ease-out', 
+        animate('0.2s ease-out', 
         style({
           transform: 'translateX(-100%)',
         }))
@@ -38,24 +38,13 @@ export class AddTaskFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tasks = this.tasksService.tasks;
   }
 
   @Output('collapse') emitCollapseForm = new EventEmitter(); 
+  @Output('addTaskSuccess') emitAddTaskSuccess = new EventEmitter();
+  @Output('addTaskFail') emitAddTaskFail = new EventEmitter();
 
-  tasks : Task[];
-  states : string[] = [
-    'Not Started',
-    'In Progress',
-    'Completed'
-  ]
-
-  possibleTags : string[] = [
-    'school project',
-    'work',
-    'japanese',
-    'misc'
-  ]
+  states: string[] = States;
 
   // Form Inputs
   title : string = '';
@@ -63,6 +52,14 @@ export class AddTaskFormComponent implements OnInit {
   dueDate : {"year" : number, "month" : number, "day" : number};
   state: string = 'Not Started';
   selectedTags: string[] = [];
+
+  clearInputs() {
+    this.title = '';
+    this.description = '';
+    this.dueDate = null;
+    this.state = 'Not Started';
+    this.selectedTags = [];
+  }
 
   fillSelectedTags(tags : string[]){
     this.selectedTags = tags;
@@ -73,16 +70,21 @@ export class AddTaskFormComponent implements OnInit {
   }
 
   submitForm(){
-    let newTask : Task = new Task(
-      this.title,
-      this.description,
-      this.dueDate,
-      this.state,
-      this.selectedTags,
-    )
+    // TODO: Validate form. Do not allow submission without title and description
+    let newTask : Task = new Task({
+      title: this.title,
+      description: this.description,
+      dueDate: new Date(this.dueDate.year, this.dueDate.month - 1, this.dueDate.day),
+      state: this.state,
+      tags: this.selectedTags,
+    })
 
-    this.tasksService.addTask(newTask);
+    this.tasksService.addTask(newTask).subscribe(
+      (res) => {this.tasksService.getAllTasks(); this.emitAddTaskSuccess.emit()},
+      (err) => { console.log(err); this.emitAddTaskFail.emit(err) }
+    );
     this.collapseForm();
+    this.clearInputs();
   }
 
 }
