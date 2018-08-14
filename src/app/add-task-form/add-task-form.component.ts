@@ -32,20 +32,24 @@ import { States } from 'src/app.constants';
 })
 export class AddTaskFormComponent implements OnInit {
   @Input() show;
+  
+  @Output('collapse') emitCollapseForm = new EventEmitter(); 
+  @Output('addTaskSuccess') emitAddTaskSuccess = new EventEmitter();
+  @Output('addTaskFail') emitAddTaskFail = new EventEmitter();
+  
+  states: string[] = States;
+  possibleTags: string[] = [];
+  
   constructor(
     public el: ElementRef,
     private tasksService : TasksService
   ) { }
 
   ngOnInit() {
+    this.tasksService.getAllTags().subscribe(
+      (res) => {this.possibleTags = res;}
+    );
   }
-
-  @Output('collapse') emitCollapseForm = new EventEmitter(); 
-  @Output('addTaskSuccess') emitAddTaskSuccess = new EventEmitter();
-  @Output('addTaskFail') emitAddTaskFail = new EventEmitter();
-
-  states: string[] = States;
-
   // Form Inputs
   title : string = '';
   description: string = '';

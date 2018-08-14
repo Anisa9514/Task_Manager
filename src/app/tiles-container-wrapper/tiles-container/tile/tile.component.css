@@ -15,12 +15,16 @@
     overflow: auto;
 }
 
-.date-n-init{
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-end;
+.date-n-init {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.2rem;
 }
 
+.dropdown-menu {
+    left: auto;
+    right: 0;
+}
 .card-body{
     height: 60%;
     display: flex;
@@ -32,3 +36,12 @@
     overflow: auto;
 }
 
+.date-n-init > .btn > .material-icons {
+    font-size: 1.5rem;
+    position: relative;
+    top: 0.2rem;
+}
+
+.date-n-init > .btn{
+    padding: 0 !important;
+}

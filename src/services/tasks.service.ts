@@ -12,6 +12,19 @@ export class TasksService {
 
   constructor(private http: HttpClient) {}
 
+  getAllTags(): Observable<string[]> {
+    console.log('get all tags called');
+    return this.http.get<any>(BASE_URL + "/tags").pipe(
+      map(res => {
+        let tagArr = [];
+        res.forEach(tag => {
+          tagArr.push(tag.name);
+        });
+        return tagArr;
+      })
+    );
+  }
+
   getAllTasks(): Observable<Task[]> {
     console.log('get all tasks called');
     return this.http.get<any>(BASE_URL + "/tasks").pipe(

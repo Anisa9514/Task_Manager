@@ -6,9 +6,25 @@ import { Task } from '../../../../models/task.model';
   templateUrl: './tile.component.html',
   styleUrls: ['./tile.component.css']
 })
-export class TileComponent{
+export class TileComponent implements OnInit{
   @Input() task : Task;
+  showDropdown: boolean;
 
   constructor() { }
 
+  ngOnInit(){
+    this.showDropdown = false;
+  }
+
+  toggleDropdown(){
+    this.showDropdown = !this.showDropdown;
+  }
+
+  onEditTask(){
+
+  }
+
+  onDeleteTask(){
+    
+  }
 }
