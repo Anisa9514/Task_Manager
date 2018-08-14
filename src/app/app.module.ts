@@ -15,6 +15,7 @@ import { NameInitialsPipe } from '../pipes/name-initials.pipe';
 import { ShortenPipe } from '../pipes/shorten.pipe';
 import { TilesContainerWrapperComponent } from './tiles-container-wrapper/tiles-container-wrapper.component';
 import { NgDragDropModule } from 'ng-drag-drop';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NgDragDropModule } from 'ng-drag-drop';
     BrowserAnimationsModule,
     FormsModule,
     NgbModule.forRoot(),
-    NgDragDropModule.forRoot()
+    NgDragDropModule.forRoot(),
+    ClickOutsideModule
   ],
   providers: [],
   bootstrap: [AppComponent]

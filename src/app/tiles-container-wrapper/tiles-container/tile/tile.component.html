@@ -2,10 +2,10 @@
   <div class="card-header">
     <div>{{task.title | uppercase}}</div>
     <div class="date-n-init">
-        <button type="button" (click)="toggleDropdown()" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" (click)="toggleDropdown($event)" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="material-icons">more_vert</i>
         </button>
-        <div class="dropdown-menu" [ngClass]="{'show': showDropdown}">
+        <div class="dropdown-menu" (clickOutside)="onClickedOutside($event)" [clickOutsideEnabled]="showDropdown" [ngClass]="{'show': showDropdown}">
           <div class="dropdown-item" onClick="onEditTask()">Edit task</div>
           <div class="dropdown-item" onClick="onDeleteTask()">Delete task</div>
         </div>

@@ -25,6 +25,7 @@
     border-radius: 0;
 }
 .toggle-btns {
+    margin-top: 25px;
     display: flex;
     position: absolute;
     flex-flow: column nowrap;

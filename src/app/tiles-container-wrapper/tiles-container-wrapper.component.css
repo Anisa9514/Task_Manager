@@ -1,10 +1,8 @@
 .wrapper {
     display: flex;
-    float: right;
     flex-flow: row nowrap;
     justify-content: space-between;
-    overflow: auto;
-    width: 95%;
+    width: 90%;
     height: 100%;
-    margin-right: 1rem;
+    margin-left: 60px;
 }

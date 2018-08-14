@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task.model';
+import { Observable } from '../../node_modules/rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { Task } from '../models/task.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  tasks: Task[] = [];
+  tasks$: Observable<Task[]>;
   title = 'app';
   isFormCollapsed : boolean = true;
 
@@ -17,24 +18,21 @@ export class AppComponent {
   ){}
 
   ngOnInit(){
-    this.fetchTasks();
+    this.tasks$ = this.tasksService.tasks;
+    this.tasksService.getAllTasks();
   }
 
-  fetchTasks(){
-    this.tasksService.getAllTasks().subscribe(
-      (res) => {this.tasks = res;}
-     )
-  }
-  toggleForm(){
+  toggleForm(e){
+    e.stopPropagation();
     this.isFormCollapsed = !this.isFormCollapsed
     return this.isFormCollapsed;
   }
 
-  addTask(){
+  filter(){
    
   }
 
-  getTasks(){
-    this.tasksService.getAllTasks().subscribe();
+  onClickedOutside(e){
+    this.isFormCollapsed = true;
   }
 }

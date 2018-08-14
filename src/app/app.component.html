@@ -5,21 +5,17 @@
 
   <div class="main-content">
     <div class="toggle-btns">
-      <button *ngIf="isFormCollapsed" class="btn btn-secondary toggle" (click)="toggleForm()">
+      <button *ngIf="isFormCollapsed" class="btn btn-secondary toggle" (click)="toggleForm($event)">
         <i class="material-icons">add</i>
       </button>
   
-      <button *ngIf="isFormCollapsed" class="btn btn-primary toggle" (click)="addTask()">
-        <i class="material-icons">add</i>
-      </button>
-
-      <button *ngIf="isFormCollapsed" class="btn btn-primary toggle" (click)="getTasks()">
-        <i class="material-icons">list</i>
+      <button *ngIf="isFormCollapsed" class="btn btn-primary toggle" (click)="filter()">
+        <i class="material-icons">filter_list</i>
       </button>
     </div>
-    <app-add-task-form [show]="!isFormCollapsed" (collapse)="toggleForm()" (addTaskSuccess)="fetchTasks()"></app-add-task-form>
+    <app-add-task-form (clickOutside)="onClickedOutside()" [clickOutsideEnabled]="!isFormCollapsed" [show]="!isFormCollapsed" (collapse)="toggleForm()" (addTaskSuccess)="fetchTasks()"></app-add-task-form>
     <div class="tiles-wrapper">
-      <app-tiles-container-wrapper [tasks]="tasks"></app-tiles-container-wrapper>  
+      <app-tiles-container-wrapper [tasks]="tasks$ | async"></app-tiles-container-wrapper>  
     </div>      
   </div>
 

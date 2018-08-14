@@ -16,7 +16,8 @@ export class TileComponent implements OnInit{
     this.showDropdown = false;
   }
 
-  toggleDropdown(){
+  toggleDropdown(e){
+    e.stopPropagation();
     this.showDropdown = !this.showDropdown;
   }
 
@@ -26,5 +27,9 @@ export class TileComponent implements OnInit{
 
   onDeleteTask(){
     
+  }
+
+  onClickedOutside(e){
+    this.showDropdown = false;
   }
 }

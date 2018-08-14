@@ -83,10 +83,7 @@ export class AddTaskFormComponent implements OnInit {
       tags: this.selectedTags,
     })
 
-    this.tasksService.addTask(newTask).subscribe(
-      (res) => {this.tasksService.getAllTasks(); this.emitAddTaskSuccess.emit()},
-      (err) => { console.log(err); this.emitAddTaskFail.emit(err) }
-    );
+    this.tasksService.addTask(newTask);
     this.collapseForm();
     this.clearInputs();
   }

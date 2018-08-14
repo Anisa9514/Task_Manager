@@ -1,33 +1,30 @@
 import { Injectable } from "@angular/core";
 import { Task } from "../models/task.model";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { map, catchError } from "rxjs/operators";
-const BASE_URL = "http://localhost:8000/api";
 
 @Injectable({
   providedIn: "root"
 })
 export class TasksService {
 
-  constructor(private http: HttpClient) {}
-
-  getAllTags(): Observable<string[]> {
-    console.log('get all tags called');
-    return this.http.get<any>(BASE_URL + "/tags").pipe(
-      map(res => {
-        let tagArr = [];
-        res.forEach(tag => {
-          tagArr.push(tag.name);
-        });
-        return tagArr;
-      })
-    );
+  tasks: Observable<Task[]>;
+  private _tasks: BehaviorSubject<Task[]>;
+  private baseUrl: string;
+  private dataStore: {
+    tasks: Task[]
   }
 
-  getAllTasks(): Observable<Task[]> {
-    console.log('get all tasks called');
-    return this.http.get<any>(BASE_URL + "/tasks").pipe(
+  constructor(private http: HttpClient) {
+    this.baseUrl = "http://localhost:8000/api";
+    this.dataStore = { tasks: [] };
+    this._tasks = <BehaviorSubject<Task[]>> new BehaviorSubject([]);
+    this.tasks = this._tasks.asObservable();
+  }
+
+  getAllTasks(){
+    this.http.get<any>(this.baseUrl + "/tasks").pipe(
       map(res => {
         return res.map(task => {
           let newTask = new Task();
@@ -35,12 +32,18 @@ export class TasksService {
           return newTask;
         });
       })
-    );
+    ).subscribe(data => {
+      this.dataStore.tasks = data;
+      this._tasks.next(Object.assign({}, this.dataStore).tasks);
+    }, error => console.log('Could not load tasks. Error: ' + error ));
   }
 
   addTask(task: Task) {
     console.log('add task called');
-    return this.http.post<any>(BASE_URL + "/tasks", task);
+    this.http.post<any>(this.baseUrl + "/tasks", task).subscribe(data => {
+      this.dataStore.tasks.push(task);
+      this._tasks.next(Object.assign({}, this.dataStore).tasks);
+    }, error => console.log('Could not create task. Error: ' + error ));
   }
 
   updateTask(task: Task) {
@@ -51,5 +54,16 @@ export class TasksService {
 
   }
 
-
+  getAllTags(): Observable<string[]> {
+    console.log('get all tags called');
+    return this.http.get<any>(this.baseUrl + "/tags").pipe(
+      map(res => {
+        let tagArr = [];
+        res.forEach(tag => {
+          tagArr.push(tag.name);
+        });
+        return tagArr;
+      })
+    );
+  }
 }
