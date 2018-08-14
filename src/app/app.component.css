@@ -7,15 +7,18 @@
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
 }
 
 .navbar {
     padding: 1rem;
-    min-width: 100%;
+    width: 100%;
+    min-width: 1250px;
     height: 10%;
 }
 
+.navbar-brand {
+    font-size: 2rem;
+}
 .toggle {
     padding-top: 10px;
     padding-bottom: 10px;

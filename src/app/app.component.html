@@ -13,7 +13,13 @@
         <i class="material-icons">filter_list</i>
       </button>
     </div>
-    <app-add-task-form (clickOutside)="onClickedOutside()" [clickOutsideEnabled]="!isFormCollapsed" [show]="!isFormCollapsed" (collapse)="toggleForm()" (addTaskSuccess)="fetchTasks()"></app-add-task-form>
+    <app-add-task-form 
+      (clickOutside)="onClickedOutside()" 
+      [clickOutsideEnabled]="!isFormCollapsed" 
+      [show]="!isFormCollapsed" 
+      (collapse)="onClickedOutside()" 
+      (addTaskSuccess)="fetchTasks()">
+  </app-add-task-form>
     <div class="tiles-wrapper">
       <app-tiles-container-wrapper [tasks]="tasks$ | async"></app-tiles-container-wrapper>  
     </div>      

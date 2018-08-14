@@ -18,8 +18,7 @@
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(143, 228, 204); 
-    cursor: pointer;
+    background: rgb(143, 228, 204);
 }
 
 * {

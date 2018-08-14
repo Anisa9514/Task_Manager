@@ -39,7 +39,6 @@ export class TasksService {
   }
 
   addTask(task: Task) {
-    console.log('add task called');
     this.http.post<any>(this.baseUrl + "/tasks", task).subscribe(data => {
       this.dataStore.tasks.push(task);
       this._tasks.next(Object.assign({}, this.dataStore).tasks);

@@ -1,47 +1,67 @@
-.tile{
-    width: 400px;
-    height: 200px;
-    margin: 5px;
-    border-radius: 0;
-    z-index: 3;
-    cursor: grab;
+.tile {
+  width: 400px;
+  height: 200px;
+  margin: 5px;
+  border-radius: 0;
+  z-index: 3;
+  cursor: grab;
 }
 
-.tile .card-header{
-    height: 20%;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    overflow: auto;
+.tile .card-header {
+  height: 20%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }
 
-.date-n-init {
+.card-header .title{
+    width: 250px; 
+    height: 1.2rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.menu {
     position: absolute;
     right: 0.5rem;
     top: 0.2rem;
 }
 
+.menu>.btn>.material-icons {
+  font-size: 1.5rem;
+  position: relative;
+  top: 0.2rem;
+}
+
+.menu>.btn {
+  padding: 0 !important;
+}
+
 .dropdown-menu {
-    left: auto;
-    right: 0;
-}
-.card-body{
-    height: 60%;
-    display: flex;
-    flex-flow: column nowrap;
+  left: auto;
+  right: 0;
 }
 
-.description{
-    height: 80%;
-    overflow: auto;
+.card-body {
+  height: 55%;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
-.date-n-init > .btn > .material-icons {
-    font-size: 1.5rem;
-    position: relative;
-    top: 0.2rem;
+.description {
+  height: 100%;
+  overflow: auto;
 }
 
-.date-n-init > .btn{
-    padding: 0 !important;
+.card-footer {
+  max-height: 25%;
+  width: 100%;
+  border-top: 1px solid #93d8c4;
+  overflow: auto;
 }
+
+.card-footer > span {
+    margin: 0 2px;
+}
+
