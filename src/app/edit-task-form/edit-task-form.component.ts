@@ -43,13 +43,12 @@ export class EditTaskFormComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     let date = new Date(this.task.dueDate);
-
     this.title = this.task.title;
     this.description = this.task.description;
     this.dueDate = {
       "year": date.getFullYear(),
       "month": date.getMonth() + 1,
-      "day": date.getDay()
+      "day": date.getDate()
     }
     this.state = this.task.state;
     this.selectedTags = this.task.tags;
@@ -70,6 +69,20 @@ export class EditTaskFormComponent implements OnInit, OnChanges {
     this.emitCollapseForm.emit();
   }
 
+  taskChanged(task1: Task, task2: Task){
+    let task1DueDate = new Date(task1.dueDate);
+
+    return(
+      task1.title !== task2.title ||
+      task1.description !== task2.description ||
+      task1DueDate.getFullYear() !== task2.dueDate.getFullYear() ||
+      task1DueDate.getMonth() !== task2.dueDate.getMonth() ||
+      task1DueDate.getDate() !== task2.dueDate.getDate() ||
+      task1.state !== task2.state ||
+      !task2.tags.every((t2tag) => task1.tags.includes(t2tag)) ||
+      !task1.tags.every((t1tag) => task2.tags.includes(t1tag))
+    );
+  }
   submitForm(){
     // TODO: Validate form. Do not allow submission without title and description
     let newTask : Task = new Task({
@@ -81,7 +94,9 @@ export class EditTaskFormComponent implements OnInit, OnChanges {
       tags: this.selectedTags,
     })
 
-    this.tasksService.updateTask(newTask);
+    if(this.taskChanged(this.task, newTask)){
+      this.tasksService.updateTask(newTask);
+    }
     this.collapseForm();
     this.clearInputs();
   }

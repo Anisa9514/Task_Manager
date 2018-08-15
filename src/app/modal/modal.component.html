@@ -1,4 +1,5 @@
 <div class="modal" [ngClass]="{'show': show}">
+  <div class="overlay" (click)="onClose($event)"></div>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

@@ -34,4 +34,8 @@ export class TilesContainerWrapperComponent implements OnInit{
     this.showDeleteModal = true;
     this.modalTask = e;
   }
+
+  onConfirmDelete(){
+    this.tasksService.removeTask(this.modalTask);
+  }
 }

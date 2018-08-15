@@ -55,7 +55,11 @@ export class TasksService {
   }
 
   removeTask(task: Task) {
-
+    this.http.delete<any>(this.baseUrl + "/task/" + task._id).subscribe(data => {
+      const index = this.dataStore.tasks.findIndex(t => t._id === task._id);
+      this.dataStore.tasks.splice(index, 1);
+      this._tasks.next(Object.assign({}, this.dataStore).tasks);
+    }, error => console.log('Could not delete task. Error: ' + error));
   }
 
   getAllTags(): Observable<string[]> {
