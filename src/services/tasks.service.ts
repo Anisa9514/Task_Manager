@@ -10,19 +10,34 @@ import { map, catchError } from "rxjs/operators";
 export class TasksService {
 
   tasks: Observable<Task[]>;
+  errors: Observable <string[]>;
   private _tasks: BehaviorSubject<Task[]>;
+  private _errors: BehaviorSubject<string[]>;
   private baseUrl: string;
   private dataStore: {
-    tasks: Task[]
+    tasks: Task[],
+    errors: string[]
   }
 
   constructor(private http: HttpClient) {
     this.baseUrl = "http://localhost:8000/api";
-    this.dataStore = { tasks: [] };
+    this.dataStore = { tasks: [], errors: [] };
     this._tasks = <BehaviorSubject<Task[]>> new BehaviorSubject([]);
     this.tasks = this._tasks.asObservable();
+    this._errors = <BehaviorSubject<string[]>> new BehaviorSubject([]);
+    this.errors = this._errors.asObservable();
   }
 
+  addError(err: string){
+    this.dataStore.errors.push(err);
+    this._errors.next(this.dataStore.errors);
+  }
+
+  removeError(index: number){
+    this.dataStore.errors.splice(index, 1);
+    this._errors.next(this.dataStore.errors);
+  }
+  
   getAllTasks(){
     this.http.get<any>(this.baseUrl + "/tasks").pipe(
       map(res => {
@@ -35,14 +50,20 @@ export class TasksService {
     ).subscribe(data => {
       this.dataStore.tasks = data;
       this._tasks.next(Object.assign({}, this.dataStore).tasks);
-    }, error => console.log('Could not load tasks. Error: ' + error ));
+    }, error => {
+      this.addError('There was an error in fetching tasks. Please try again later');
+      console.log('Could not load tasks. Error: ' + error );
+    });
   }
 
   addTask(task: Task) {
     this.http.post<any>(this.baseUrl + "/tasks", task).subscribe(data => {
       this.dataStore.tasks.push(task);
       this._tasks.next(Object.assign({}, this.dataStore).tasks);
-    }, error => console.log('Could not create task. Error: ' + error ));
+    }, error => {
+      this.addError('There was an error in creating the task. Please try again later');
+      console.log('Could not create task. Error: ' + error )
+    });
   }
 
   updateTask(task: Task) {
@@ -51,7 +72,10 @@ export class TasksService {
       this.dataStore.tasks.splice(index, 1);
       this.dataStore.tasks.push(task);
       this._tasks.next(Object.assign({}, this.dataStore).tasks);
-    }, error => console.log('Could not update task. Error: ' + error));
+    }, error => {
+      this.addError('There was an error in updating the task. Please try again later');
+      console.log('Could not update task. Error: ' + error)
+    });
   }
 
   removeTask(task: Task) {
@@ -59,7 +83,10 @@ export class TasksService {
       const index = this.dataStore.tasks.findIndex(t => t._id === task._id);
       this.dataStore.tasks.splice(index, 1);
       this._tasks.next(Object.assign({}, this.dataStore).tasks);
-    }, error => console.log('Could not delete task. Error: ' + error));
+    }, error => {
+      this.addError('There was an error in removing the task. Please try again later');
+      console.log('Could not delete task. Error: ' + error)
+    });
   }
 
   getAllTags(): Observable<string[]> {

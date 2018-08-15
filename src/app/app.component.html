@@ -14,7 +14,7 @@
       </button>
     </div>
     <app-add-task-form 
-      (clickOutside)="onClickedOutside()" 
+      (clickOutside)="onClickedOutside($event)" 
       [clickOutsideEnabled]="!isFormCollapsed" 
       [show]="!isFormCollapsed" 
       (collapse)="onClickedOutside()" 
@@ -24,5 +24,10 @@
       <app-tiles-container-wrapper [tasks]="tasks$ | async"></app-tiles-container-wrapper>  
     </div>      
   </div>
-
+  <div class="errors">
+    <div *ngFor="let error of errors$ | async; index as i" class="alert alert-dismissible alert-danger">
+      <button type="button" (click)="removeAlert(i)" class="close" data-dismiss="alert">&times;</button>
+      {{error}}
+    </div>
+  </div>
 </div>

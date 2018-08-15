@@ -46,3 +46,10 @@
     height: 100%;
 }
 
+.errors {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+}

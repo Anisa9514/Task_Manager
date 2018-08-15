@@ -10,6 +10,7 @@ import { Observable } from '../../node_modules/rxjs';
 })
 export class AppComponent {
   tasks$: Observable<Task[]>;
+  errors$: Observable<string[]>;
   title = 'app';
   isFormCollapsed : boolean = true;
 
@@ -20,6 +21,7 @@ export class AppComponent {
 
   ngOnInit(){
     this.tasks$ = this.tasksService.tasks;
+    this.errors$ = this.tasksService.errors;
     this.tasksService.getAllTasks();
   }
 
@@ -32,7 +34,13 @@ export class AppComponent {
   filter(){
   }
 
+  removeAlert(index: number){
+    this.tasksService.removeError(index);
+  }
   onClickedOutside(e){
+    if(e.target.classList.contains('custom-day')){
+      return;
+    }
     this.isFormCollapsed = true;
   }
 }
