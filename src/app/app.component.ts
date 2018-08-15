@@ -38,7 +38,7 @@ export class AppComponent {
     this.tasksService.removeError(index);
   }
   onClickedOutside(e){
-    if(e.target.classList.contains('custom-day')){
+    if(e && e.target.classList.contains('custom-day')){
       return;
     }
     this.isFormCollapsed = true;
