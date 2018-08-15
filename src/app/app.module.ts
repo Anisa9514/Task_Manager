@@ -19,6 +19,7 @@ import { NgDragDropModule } from 'ng-drag-drop';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { ModalComponent } from './modal/modal.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FilterTaskFormComponent } from './filter-task-form/filter-task-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ShortenPipe,
     TilesContainerWrapperComponent,
     ModalComponent,
+    FilterTaskFormComponent,
   ],
   imports: [
     HttpClientModule,

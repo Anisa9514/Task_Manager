@@ -38,7 +38,8 @@ export class AppComponent implements OnInit{
   errors$: Observable<string[]>;
   loading$: Observable<boolean>;
   title = 'app';
-  isFormCollapsed : boolean = true;
+  isAddFormCollapsed : boolean = true;
+  isFilterFormCollapsed: boolean = true;
 
   showModal = false;
   constructor(
@@ -62,20 +63,28 @@ export class AppComponent implements OnInit{
 
   toggleForm(e){
     e.stopPropagation();
-    this.isFormCollapsed = !this.isFormCollapsed
-    return this.isFormCollapsed;
+    this.isAddFormCollapsed = !this.isAddFormCollapsed
+    return this.isAddFormCollapsed;
   }
 
-  filter(){
+  filter(e){
+    e.stopPropagation();
+    this.isFilterFormCollapsed = !this.isFilterFormCollapsed
+    return this.isFilterFormCollapsed;
   }
 
   removeAlert(index: number){
     this.tasksService.removeError(index);
   }
+  
   onClickedOutside(e){
     if(e && e.target.classList.contains('custom-day')){
       return;
     }
-    this.isFormCollapsed = true;
+    this.isAddFormCollapsed = true;
+  }
+
+  collapseFilterForm(){
+    this.isFilterFormCollapsed = true;
   }
 }

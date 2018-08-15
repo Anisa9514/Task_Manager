@@ -1,4 +1,4 @@
-<div class="app">
+<div class="app" [ngClass]="{'form-expanded': !isFilterFormCollapsed}">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">TASK MANAGER</a>
   </nav>
@@ -12,18 +12,27 @@
 
   <div class="main-content">
     <div class="toggle-btns">
-      <button *ngIf="isFormCollapsed" class="btn btn-secondary toggle" (click)="toggleForm($event)">
+      <button *ngIf="isAddFormCollapsed" class="btn btn-secondary toggle" (click)="toggleForm($event)">
         <i class="material-icons">add</i>
+      </button>
+  
+      <button *ngIf="isFilterFormCollapsed" class="btn btn-primary toggle" (click)="filter($event)">
+        <i class="material-icons">filter_list</i>
       </button>
     </div>
     <app-add-task-form 
-      (clickOutside)="onClickedOutside($event)" 
-      [clickOutsideEnabled]="!isFormCollapsed" 
-      [show]="!isFormCollapsed" 
-      (collapse)="onClickedOutside()" 
+        (clickOutside)="onClickedOutside($event)" 
+        [clickOutsideEnabled]="!isAddFormCollapsed" 
+        [show]="!isAddFormCollapsed" 
+        (collapse)="onClickedOutside()" 
+        (addTaskSuccess)="fetchTasks()">
+    </app-add-task-form>
+    <app-filter-task-form 
+      [show]="!isFilterFormCollapsed" 
+      (collapse)="collapseFilterForm()" 
       (addTaskSuccess)="fetchTasks()">
-  </app-add-task-form>
-  <div class="tiles-wrapper">
+    </app-filter-task-form>
+    <div class="tiles-wrapper" [ngClass]="{'shrink': !isFilterFormCollapsed}">
       <app-tiles-container-wrapper [tasks]="tasks$ | async"></app-tiles-container-wrapper>  
     </div>      
   </div>
