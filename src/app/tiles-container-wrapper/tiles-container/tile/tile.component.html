@@ -6,8 +6,8 @@
           <i class="material-icons">more_vert</i>
         </button>
         <div class="dropdown-menu" (clickOutside)="onClickedOutside($event)" [clickOutsideEnabled]="showDropdown" [ngClass]="{'show': showDropdown}">
-          <div class="dropdown-item" onClick="onEditTask()">Edit task</div>
-          <div class="dropdown-item" onClick="onDeleteTask()">Delete task</div>
+          <div class="dropdown-item" (click)="onEditTask()">Edit task</div>
+          <div class="dropdown-item" (click)="onDeleteTask()">Delete task</div>
         </div>
     </div>
   </div>

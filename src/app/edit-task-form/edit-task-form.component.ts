@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, HostListener, Input, OnChanges } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { TasksService } from '../../services/tasks.service';
 import {
@@ -10,36 +10,19 @@ import {
 import { States } from 'src/app.constants';
 
 @Component({
-  selector: 'app-add-task-form',
-  templateUrl: './add-task-form.component.html',
-  styleUrls: ['./add-task-form.component.css'],
-  animations: [
-    trigger('visibility', [
-      transition(':enter', [
-        style({
-          transform: 'translateX(-100%)',
-        }),
-        animate('0.2s ease-in')
-      ]),
-      transition(':leave', [
-        animate('0.2s ease-out', 
-        style({
-          transform: 'translateX(-100%)',
-        }))
-      ]),
-    ])
-  ]
+  selector: 'app-edit-task-form',
+  templateUrl: './edit-task-form.component.html',
+  styleUrls: ['./edit-task-form.component.css'],
 })
-export class AddTaskFormComponent implements OnInit {
-  @Input() show;
-  
+export class EditTaskFormComponent implements OnInit, OnChanges {
+  @Input() task: Task;
   @Output('collapse') emitCollapseForm = new EventEmitter(); 
-  @Output('addTaskSuccess') emitAddTaskSuccess = new EventEmitter();
-  @Output('addTaskFail') emitAddTaskFail = new EventEmitter();
+  @Output('editTaskSuccess') emitEditTaskSuccess = new EventEmitter();
+  @Output('editTaskFail') emitEditTaskFail = new EventEmitter();
   
   states: string[] = States;
   possibleTags: string[] = [];
-
+  
   // Form Inputs
   title : string;
   description: string;
@@ -56,13 +39,21 @@ export class AddTaskFormComponent implements OnInit {
     this.tasksService.getAllTags().subscribe(
       (res) => {this.possibleTags = res;}
     );
-    this.title = '';
-    this.description = '';
-    this.state = 'Not Started';
-    this.selectedTags = [];
   }
 
+  ngOnChanges() {
+    let date = new Date(this.task.dueDate);
 
+    this.title = this.task.title;
+    this.description = this.task.description;
+    this.dueDate = {
+      "year": date.getFullYear(),
+      "month": date.getMonth() + 1,
+      "day": date.getDay()
+    }
+    this.state = this.task.state;
+    this.selectedTags = this.task.tags;
+  }
   clearInputs() {
     this.title = '';
     this.description = '';
@@ -82,6 +73,7 @@ export class AddTaskFormComponent implements OnInit {
   submitForm(){
     // TODO: Validate form. Do not allow submission without title and description
     let newTask : Task = new Task({
+      _id: this.task._id,
       title: this.title,
       description: this.description,
       dueDate: new Date(this.dueDate.year, this.dueDate.month - 1, this.dueDate.day),
@@ -89,7 +81,7 @@ export class AddTaskFormComponent implements OnInit {
       tags: this.selectedTags,
     })
 
-    this.tasksService.addTask(newTask);
+    this.tasksService.updateTask(newTask);
     this.collapseForm();
     this.clearInputs();
   }

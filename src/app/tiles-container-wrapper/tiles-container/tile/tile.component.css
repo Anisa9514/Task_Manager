@@ -2,7 +2,7 @@
   width: 400px;
   height: 200px;
   margin: 5px;
-  border-radius: 0;
+  border-radius: 10px;
   z-index: 3;
   cursor: grab;
 }
@@ -64,4 +64,3 @@
 .card-footer > span {
     margin: 0 2px;
 }
-

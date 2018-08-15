@@ -5,7 +5,8 @@ import { Component,
          EventEmitter, 
          ElementRef, 
          ViewChild,
-         Renderer2
+         Renderer2,
+         OnChanges
         } from '@angular/core';
 
 
@@ -14,9 +15,10 @@ import { Component,
   templateUrl: './chip-input.component.html',
   styleUrls: ['./chip-input.component.css']
 })
-export class ChipInputComponent implements OnInit {
+export class ChipInputComponent implements OnInit, OnChanges {
 
   @Input() options : string[];
+  @Input() inputChips: string[];
   @Input('inputPlaceholder') helperPlaceHolder : string;
   @Output() emitSelectedOpts = new EventEmitter<string[]>();
 
@@ -34,6 +36,12 @@ export class ChipInputComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+    if(this.inputChips && this.inputChips.length > 0){
+      this.chips = this.inputChips;
+    }
   }
 
   private optIndex = -1;

@@ -46,7 +46,12 @@ export class TasksService {
   }
 
   updateTask(task: Task) {
-
+    this.http.put<any>(this.baseUrl + "/task/" + task._id, task).subscribe(data => {
+      const index = this.dataStore.tasks.findIndex((t) => t._id === task._id);
+      this.dataStore.tasks.splice(index, 1);
+      this.dataStore.tasks.push(task);
+      this._tasks.next(Object.assign({}, this.dataStore).tasks);
+    }, error => console.log('Could not update task. Error: ' + error));
   }
 
   removeTask(task: Task) {

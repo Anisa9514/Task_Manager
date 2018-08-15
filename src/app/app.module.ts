@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
+import { EditTaskFormComponent } from './edit-task-form/edit-task-form.component';
 import { TilesContainerComponent } from './tiles-container-wrapper/tiles-container/tiles-container.component';
 
 import { FormsModule } from '@angular/forms';
@@ -16,17 +17,20 @@ import { ShortenPipe } from '../pipes/shorten.pipe';
 import { TilesContainerWrapperComponent } from './tiles-container-wrapper/tiles-container-wrapper.component';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTaskFormComponent,
+    EditTaskFormComponent,
     TilesContainerComponent,
     ChipInputComponent,
     TileComponent,
     NameInitialsPipe,
     ShortenPipe,
     TilesContainerWrapperComponent,
+    ModalComponent,
   ],
   imports: [
     HttpClientModule,

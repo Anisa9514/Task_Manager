@@ -13,6 +13,7 @@ export class AppComponent {
   title = 'app';
   isFormCollapsed : boolean = true;
 
+  showModal = false;
   constructor(
     private tasksService : TasksService
   ){}
@@ -29,7 +30,6 @@ export class AppComponent {
   }
 
   filter(){
-   
   }
 
   onClickedOutside(e){

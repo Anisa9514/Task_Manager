@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../../../models/task.model';
+import { TasksService } from '../../../../services/tasks.service';
 
 @Component({
   selector: 'app-tile',
@@ -8,9 +9,11 @@ import { Task } from '../../../../models/task.model';
 })
 export class TileComponent implements OnInit{
   @Input() task : Task;
+  @Output('editClicked') onEditClicked: EventEmitter<any> = new EventEmitter<any>();
+  @Output('deleteClicked') onDeleteClicked: EventEmitter<any> = new EventEmitter<any>();
   showDropdown: boolean;
 
-  constructor() { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit(){
     this.showDropdown = false;
@@ -22,11 +25,13 @@ export class TileComponent implements OnInit{
   }
 
   onEditTask(){
-
+    this.showDropdown = false;
+    this.onEditClicked.emit(this.task);
   }
-
+  
   onDeleteTask(){
-    
+    this.showDropdown = false;
+    this.onDeleteClicked.emit(this.task);
   }
 
   onClickedOutside(e){

@@ -20,7 +20,7 @@
       (collapse)="onClickedOutside()" 
       (addTaskSuccess)="fetchTasks()">
   </app-add-task-form>
-    <div class="tiles-wrapper">
+  <div class="tiles-wrapper">
       <app-tiles-container-wrapper [tasks]="tasks$ | async"></app-tiles-container-wrapper>  
     </div>      
   </div>

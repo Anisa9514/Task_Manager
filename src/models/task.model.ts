@@ -1,7 +1,7 @@
 
 export class Task{
 
-    public id: number;
+    public _id: string;
     public title : string;
     public description : string;
     public dueDate : Date;
@@ -10,6 +10,7 @@ export class Task{
 
 
     constructor(obj?: any){
+        this._id = (obj && obj._id) || '';
         this.title = (obj && obj.title) || '';
         this.description = (obj && obj.description) || '';
         this.dueDate = (obj && obj.dueDate) || null;
@@ -18,7 +19,7 @@ export class Task{
     }
 
     public deserialize(obj: any){
-        this.id = obj.id;
+        this._id = obj._id;
         this.title = obj.title;
         this.description = obj.description;
         this.dueDate = obj.dueDate;
@@ -28,8 +29,8 @@ export class Task{
 
     public serialize(){
         let json: any = {};
-        if(this.id){
-            json.id = this.id;
+        if(this._id){
+            json._id = this._id;
         }
 
         json.title = this.title;
