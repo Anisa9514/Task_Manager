@@ -18,6 +18,7 @@ import { TilesContainerWrapperComponent } from './tiles-container-wrapper/tiles-
 import { NgDragDropModule } from 'ng-drag-drop';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { ModalComponent } from './modal/modal.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ModalComponent } from './modal/modal.component';
     FormsModule,
     NgbModule.forRoot(),
     NgDragDropModule.forRoot(),
-    ClickOutsideModule
+    ClickOutsideModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -53,8 +53,3 @@
     display: flex;
     flex-flow: column-reverse nowrap;
 }
-
-.errors .alert{
-    overflow: hidden;
-    max-height: 3rem;
-}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task.model';
 import { Observable } from '../../node_modules/rxjs';
@@ -8,6 +8,7 @@ import {
   animate,
   transition
 }from '@angular/animations';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -32,20 +33,30 @@ import {
     ])
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   tasks$: Observable<Task[]>;
   errors$: Observable<string[]>;
+  loading$: Observable<boolean>;
   title = 'app';
   isFormCollapsed : boolean = true;
 
   showModal = false;
   constructor(
-    private tasksService : TasksService
+    private tasksService : TasksService,
+    private spinner: NgxSpinnerService
   ){}
 
   ngOnInit(){
     this.tasks$ = this.tasksService.tasks;
     this.errors$ = this.tasksService.errors;
+    this.loading$ = this.tasksService.loading;
+    this.loading$.subscribe((res) => {
+      if(res){
+        this.spinner.show();
+      } else {
+        this.spinner.hide();
+      }
+    });
     this.tasksService.getAllTasks();
   }
 

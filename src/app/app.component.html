@@ -3,14 +3,17 @@
     <a class="navbar-brand" href="#">TASK MANAGER</a>
   </nav>
 
+  <ngx-spinner 
+    bdColor = "rgba(51, 51, 51, 0.8)"
+    size = "large"
+    color = "#f3969a"
+    type = "ball-beat">
+  </ngx-spinner>
+
   <div class="main-content">
     <div class="toggle-btns">
       <button *ngIf="isFormCollapsed" class="btn btn-secondary toggle" (click)="toggleForm($event)">
         <i class="material-icons">add</i>
-      </button>
-  
-      <button *ngIf="isFormCollapsed" class="btn btn-primary toggle" (click)="filter()">
-        <i class="material-icons">filter_list</i>
       </button>
     </div>
     <app-add-task-form 
