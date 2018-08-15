@@ -25,7 +25,7 @@
     </div>      
   </div>
   <div class="errors">
-    <div *ngFor="let error of errors$ | async; index as i" class="alert alert-dismissible alert-danger">
+    <div [@visibility]="'in'" *ngFor="let error of errors$ | async; index as i" class="alert alert-dismissible alert-danger">
       <button type="button" (click)="removeAlert(i)" class="close" data-dismiss="alert">&times;</button>
       {{error}}
     </div>

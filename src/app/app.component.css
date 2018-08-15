@@ -51,5 +51,10 @@
     right: 0;
     bottom: 10px;
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column-reverse nowrap;
+}
+
+.errors .alert{
+    overflow: hidden;
+    max-height: 3rem;
 }
