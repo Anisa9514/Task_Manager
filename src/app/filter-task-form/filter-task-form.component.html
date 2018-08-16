@@ -1,10 +1,46 @@
 <div *ngIf="show" [@visibility]="'in'" class="filter-form card text-white bg-primary mb-3">
     <div class="card-body">
-        <div class="card-title container">
-          <h4 class="card-title title">Filter Tasks</h4>
-          <i class="material-icons back" (click)="collapseForm()">arrow_back</i>
-        </div>
-        <hr style="border-color:white; border-style:solid;">
+      <div class="card-title container">
+        <h4 class="card-title title">Filter Tasks</h4>
+        <i class="material-icons back" (click)="collapseForm()">arrow_back</i>
       </div>
+      <hr style="border-color:white; border-style:solid;">
+
+      <div class="form-group search-input">
+        <label for="taskTitle">Keyword Search:</label>
+        <input type="text" class="form-control" id="taskTitle" aria-describedby="taskTitle" placeholder="Search"
+          autofocus>
+      </div>
+
+      <div class="form-group search-checkboxes">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="customCheck1">
+          <label class="custom-control-label" for="customCheck1">Title</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="customCheck2">
+          <label class="custom-control-label" for="customCheck2">Description</label>
+        </div>
+      </div>
+
+      <div class="form-group datepicker">
+        <label>Due Date Range:</label>
+        <ngb-datepicker class="calendar" #dp (select)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t">
+        </ngb-datepicker>
+        <small style="color:white; padding-left: 10px">
+            click to select a range
+        </small>
+        <ng-template #t let-date="date" let-focused="focused">
+          <span class="custom-day"
+                [class.focused]="focused"
+                [class.range]="isRange(date)"
+                [class.faded]="isHovered(date) || isInside(date)"
+                (mouseenter)="hoveredDate = date"
+                (mouseleave)="hoveredDate = null">
+            {{ date.day }}
+          </span>
+        </ng-template>
+      </div>
+    </div>
 </div>
   

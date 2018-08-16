@@ -8,6 +8,8 @@ import {
   transition
 }from '@angular/animations';
 import { States } from 'src/app.constants';
+import { NgbDate } from '../../../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
+import { NgbCalendar } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-filter-task-form',
@@ -38,8 +40,12 @@ export class FilterTaskFormComponent implements OnInit {
 
   constructor(
     public el: ElementRef,
-    private tasksService : TasksService
-  ) { }
+    private tasksService : TasksService,
+    public calendar: NgbCalendar
+  ) { 
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+  }
 
   ngOnInit() {
   }
@@ -55,4 +61,24 @@ export class FilterTaskFormComponent implements OnInit {
     this.emitCollapseForm.emit();
   }
 
+  // Date
+  hoveredDate: NgbDate;
+
+  fromDate: NgbDate;
+  toDate: NgbDate;
+
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
+
+  isHovered = (date: NgbDate) => this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  isInside = (date: NgbDate) => date.after(this.fromDate) && date.before(this.toDate);
+  isRange = (date: NgbDate) => date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date)
 }
