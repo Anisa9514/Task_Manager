@@ -42,7 +42,7 @@
 
     <div class="form-group">
       <label for="tags">Tags</label>
-      <app-chip-input [inputChips]="selectedTags" [options]="possibleTags" [inputPlaceholder]="'Input tags'" (emitSelectedOpts)="fillSelectedTags($event)">
+      <app-chip-input [inputChips]="selectedTags" [options]="possibleTags$ | async" [inputPlaceholder]="'Input tags'" (emitSelectedOpts)="fillSelectedTags($event)">
         <small style="color:white; padding-left: 10px">
           press enter after each tag
         </small>

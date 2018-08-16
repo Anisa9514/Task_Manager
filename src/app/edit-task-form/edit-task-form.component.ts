@@ -8,6 +8,7 @@ import {
   transition
 }from '@angular/animations';
 import { States } from 'src/app.constants';
+import { Observable } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-edit-task-form',
@@ -21,7 +22,7 @@ export class EditTaskFormComponent implements OnInit, OnChanges {
   @Output('editTaskFail') emitEditTaskFail = new EventEmitter();
   
   states: string[] = States;
-  possibleTags: string[] = [];
+  possibleTags$: Observable<string[]>;
   
   // Form Inputs
   title : string;
@@ -36,9 +37,8 @@ export class EditTaskFormComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.tasksService.getAllTags().subscribe(
-      (res) => {this.possibleTags = res;}
-    );
+    this.possibleTags$ = this.tasksService.tags;
+    this.tasksService.getAllTags();
   }
 
   ngOnChanges() {

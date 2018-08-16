@@ -12,27 +12,33 @@ export class TasksService {
   tasks: Observable<Task[]>;
   errors: Observable <string[]>;
   loading: Observable<boolean>;
+  tags: Observable<string[]>;
 
   private _tasks: BehaviorSubject<Task[]>;
   private _errors: BehaviorSubject<string[]>;
   private _loading: BehaviorSubject<boolean>;
+  private _tags: BehaviorSubject<string[]>;
 
   private baseUrl: string;
   private dataStore: {
     tasks: Task[],
     errors: string[],
     loading: boolean,
+    tags: string[]
   }
 
   constructor(private http: HttpClient) {
     this.baseUrl = "http://localhost:8000/api";
-    this.dataStore = { tasks: [], errors: [], loading: false };
+    this.dataStore = { tasks: [], errors: [], loading: false, tags: [] };
     this._tasks = <BehaviorSubject<Task[]>> new BehaviorSubject([]);
     this.tasks = this._tasks.asObservable();
     this._errors = <BehaviorSubject<string[]>> new BehaviorSubject([]);
     this.errors = this._errors.asObservable();
     this._loading = <BehaviorSubject<boolean>> new BehaviorSubject(false);
     this.loading = this._loading.asObservable();
+    this._tags = <BehaviorSubject<string[]>> new BehaviorSubject([]);
+    this.tags = this._tags.asObservable();
+    
   }
 
   setLoading(setting){
@@ -118,9 +124,9 @@ export class TasksService {
     });
   }
 
-  getAllTags(): Observable<string[]> {
+  getAllTags() {
     console.log('get all tags called');
-    return this.http.get<any>(this.baseUrl + "/tags").pipe(
+    this.http.get<any>(this.baseUrl + "/tags").pipe(
       map(res => {
         let tagArr = [];
         res.forEach(tag => {
@@ -128,6 +134,13 @@ export class TasksService {
         });
         return tagArr;
       })
-    );
+    ).subscribe(data => {
+      this.dataStore.tags = data;
+      this._tags.next(Object.assign({}, this.dataStore).tags);
+    }, error => {
+      this.addError('There was an error in fetching tags. Some information might be missing.');
+      console.log('Could not load tags. Error: ');
+      console.log(error);
+    });
   }
 }

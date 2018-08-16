@@ -10,6 +10,7 @@ import {
 import { States } from 'src/app.constants';
 import { NgbDate } from '../../../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { NgbCalendar } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { Observable } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-filter-task-form',
@@ -36,12 +37,15 @@ export class FilterTaskFormComponent implements OnInit {
   @Input() show;
   
   @Output('collapse') emitCollapseForm = new EventEmitter(); 
+  @Output('change') emitChange = new EventEmitter();
 
-  tags = [
-    'angular',
-    'task-manager',
-    'front-end'
-  ]
+  tags$: Observable<string[]>;
+
+  // Date
+  hoveredDate: NgbDate;
+  fromDate: NgbDate;
+  toDate: NgbDate;
+  
   constructor(
     public el: ElementRef,
     private tasksService : TasksService,
@@ -52,6 +56,8 @@ export class FilterTaskFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tags$ = this.tasksService.tags;
+    this.tasksService.getAllTags();
   }
 
 
@@ -64,12 +70,6 @@ export class FilterTaskFormComponent implements OnInit {
   collapseForm(){
     this.emitCollapseForm.emit();
   }
-
-  // Date
-  hoveredDate: NgbDate;
-
-  fromDate: NgbDate;
-  toDate: NgbDate;
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {

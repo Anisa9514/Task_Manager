@@ -40,7 +40,7 @@
         <input type="text" class="form-control" placeholder="Filter tags" autofocus>
       </div>
       <div class="tags-select">
-        <app-tags-container (change)="onTagSelectionChange($event)" [tags]="tags"></app-tags-container>
+        <app-tags-container (change)="onTagSelectionChange($event)" [tags]="tags$ | async"></app-tags-container>
       </div>
       <small style="color:white; padding-left: 10px">
         click to select tags

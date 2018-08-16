@@ -3,6 +3,7 @@ button {
     padding: 0.2rem;
     margin: 2px;
     color: grey;
+    background-color: white;
 }
 
 button:hover {
