@@ -20,6 +20,8 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { ModalComponent } from './modal/modal.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FilterTaskFormComponent } from './filter-task-form/filter-task-form.component';
+import { TagsContainerComponent } from './filter-task-form/tags-container/tags-container.component';
+import { TagComponent } from './filter-task-form/tags-container/tag/tag.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { FilterTaskFormComponent } from './filter-task-form/filter-task-form.com
     TilesContainerWrapperComponent,
     ModalComponent,
     FilterTaskFormComponent,
+    TagsContainerComponent,
+    TagComponent,
   ],
   imports: [
     HttpClientModule,

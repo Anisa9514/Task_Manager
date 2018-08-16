@@ -37,7 +37,11 @@ export class FilterTaskFormComponent implements OnInit {
   
   @Output('collapse') emitCollapseForm = new EventEmitter(); 
 
-
+  tags = [
+    'angular',
+    'task-manager',
+    'front-end'
+  ]
   constructor(
     public el: ElementRef,
     private tasksService : TasksService,
@@ -81,4 +85,8 @@ export class FilterTaskFormComponent implements OnInit {
   isHovered = (date: NgbDate) => this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
   isInside = (date: NgbDate) => date.after(this.fromDate) && date.before(this.toDate);
   isRange = (date: NgbDate) => date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date)
+
+  onTagSelectionChange(e){
+    console.log(e);
+  }
 }

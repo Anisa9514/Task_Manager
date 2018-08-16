@@ -1,15 +1,12 @@
 <div *ngIf="show" [@visibility]="'in'" class="filter-form card text-white bg-primary mb-3">
-    <div class="card-body">
-      <div class="card-title container">
-        <h4 class="card-title title">Filter Tasks</h4>
-        <i class="material-icons back" (click)="collapseForm()">arrow_back</i>
-      </div>
-      <hr style="border-color:white; border-style:solid;">
-
+  <div class="card-body">
+    <div class="card-title container">
+      <h4 class="card-title title">Filter Tasks</h4>
+      <i class="material-icons back" (click)="collapseForm()">arrow_back</i>
+    </div>
+    <div class="inputs">
       <div class="form-group search-input">
-        <label for="taskTitle">Keyword Search:</label>
-        <input type="text" class="form-control" id="taskTitle" aria-describedby="taskTitle" placeholder="Search"
-          autofocus>
+        <input type="text" class="form-control" placeholder="Search by keyword" autofocus>
       </div>
 
       <div class="form-group search-checkboxes">
@@ -25,22 +22,29 @@
 
       <div class="form-group datepicker">
         <label>Due Date Range:</label>
-        <ngb-datepicker class="calendar" #dp (select)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t">
+        <ngb-datepicker #dp [firstDayOfWeek]="7" (select)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t">
         </ngb-datepicker>
         <small style="color:white; padding-left: 10px">
-            click to select a range
+          click to select a range
         </small>
         <ng-template #t let-date="date" let-focused="focused">
-          <span class="custom-day"
-                [class.focused]="focused"
-                [class.range]="isRange(date)"
-                [class.faded]="isHovered(date) || isInside(date)"
-                (mouseenter)="hoveredDate = date"
-                (mouseleave)="hoveredDate = null">
+          <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
+            (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
             {{ date.day }}
           </span>
         </ng-template>
       </div>
+
+      <label for="tags">Tags:</label>
+      <div class="form-group search-input">
+        <input type="text" class="form-control" placeholder="Filter tags" autofocus>
+      </div>
+      <div class="tags-select">
+        <app-tags-container (change)="onTagSelectionChange($event)" [tags]="tags"></app-tags-container>
+      </div>
+      <small style="color:white; padding-left: 10px">
+        click to select tags
+      </small>
     </div>
+  </div>
 </div>
-  

@@ -1,0 +1,11 @@
+
+<button 
+  type="button" 
+  class="btn" 
+  [ngClass]="{
+    'include': state === 'include',
+    'exclude': state === 'exclude'
+  }"
+  (click)="onClick()">
+    {{tag}}
+  </button>

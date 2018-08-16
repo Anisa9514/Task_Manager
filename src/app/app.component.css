@@ -11,7 +11,7 @@
 }
 
 .app.form-expanded {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .navbar {
