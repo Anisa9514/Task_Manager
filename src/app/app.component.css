@@ -67,4 +67,5 @@
     bottom: 10px;
     display: flex;
     flex-flow: column-reverse nowrap;
+    z-index: 100;
 }
