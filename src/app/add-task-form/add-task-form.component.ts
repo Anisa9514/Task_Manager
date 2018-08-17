@@ -55,7 +55,6 @@ export class AddTaskFormComponent implements OnInit {
 
   ngOnInit() {
     this.possibleTags$ = this.tasksService.tags;
-    this.tasksService.getAllTags();
     this.title = '';
     this.description = '';
     this.state = 'Not Started';

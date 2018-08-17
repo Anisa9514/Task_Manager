@@ -6,16 +6,16 @@
     </div>
     <div class="inputs">
       <div class="form-group search-input">
-        <input type="text" class="form-control" placeholder="Search by keyword" autofocus>
+        <input type="text" class="form-control" placeholder="Search by keyword" (keyup)="onSearchInputChange(e)" [(ngModel)]="searchInput" autofocus>
       </div>
 
       <div class="form-group search-checkboxes">
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customCheck1">
+          <input type="checkbox" class="custom-control-input" id="customCheck1" (change)="titleCheckboxChange(e)" [(ngModel)]="searchNameCheckbox">
           <label class="custom-control-label" for="customCheck1">Title</label>
         </div>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customCheck2">
+          <input type="checkbox" class="custom-control-input" id="customCheck2" (change)="descriptionCheckboxChange(e)" [(ngModel)]="searchDescriptionCheckbox">
           <label class="custom-control-label" for="customCheck2">Description</label>
         </div>
       </div>
@@ -24,8 +24,8 @@
         <label>Due Date Range:</label>
         <ngb-datepicker #dp [firstDayOfWeek]="7" (select)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t">
         </ngb-datepicker>
-        <small style="color:white; padding-left: 10px">
-          click to select a range
+        <small class="clear-datepicker" style="color:white; padding-left: 10px">
+          <span (click)="clearDatepicker()">Clear Calendar</span>
         </small>
         <ng-template #t let-date="date" let-focused="focused">
           <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
@@ -37,14 +37,11 @@
 
       <label for="tags">Tags:</label>
       <div class="form-group search-input">
-        <input type="text" class="form-control" placeholder="Filter tags" autofocus>
+        <input type="text" class="form-control" placeholder="Filter tags" autofocus [(ngModel)]="tagSearchInput">
       </div>
       <div class="tags-select">
-        <app-tags-container (change)="onTagSelectionChange($event)" [tags]="tags$ | async"></app-tags-container>
+        <app-tags-container (change)="onTagSelectionChange($event)" [tags]="filterTags(filteredTags)"></app-tags-container>
       </div>
-      <small style="color:white; padding-left: 10px">
-        click to select tags
-      </small>
     </div>
   </div>
 </div>

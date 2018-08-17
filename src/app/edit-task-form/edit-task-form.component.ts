@@ -38,7 +38,6 @@ export class EditTaskFormComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.possibleTags$ = this.tasksService.tags;
-    this.tasksService.getAllTags();
   }
 
   ngOnChanges() {

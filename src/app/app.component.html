@@ -16,7 +16,7 @@
         <i class="material-icons">add</i>
       </button>
   
-      <button *ngIf="isFilterFormCollapsed" class="btn btn-primary toggle" (click)="filter($event)">
+      <button *ngIf="isFilterFormCollapsed" class="btn btn-primary toggle" (click)="onFilterBtnClicked($event)">
         <i class="material-icons">filter_list</i>
       </button>
     </div>
@@ -30,10 +30,11 @@
     <app-filter-task-form 
       [show]="!isFilterFormCollapsed" 
       (collapse)="collapseFilterForm()" 
-      (addTaskSuccess)="fetchTasks()">
+      (addTaskSuccess)="fetchTasks()"
+      (change)="onChangeTaskFilter($event)">
     </app-filter-task-form>
     <div class="tiles-wrapper" [ngClass]="{'shrink': !isFilterFormCollapsed}">
-      <app-tiles-container-wrapper [tasks]="tasks$ | async"></app-tiles-container-wrapper>  
+      <app-tiles-container-wrapper [tasks]="filteredTasks"></app-tiles-container-wrapper>  
     </div>      
   </div>
   <div class="errors">
