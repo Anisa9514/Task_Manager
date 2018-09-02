@@ -28,7 +28,7 @@ export class TasksService {
   }
 
   constructor(private http: HttpClient) {
-    this.baseUrl = "http://localhost:8000/api";
+    this.baseUrl = "https://intense-wildwood-56997.herokuapp.com/api";
     this.dataStore = { tasks: [], errors: [], loading: false, tags: [] };
     this._tasks = <BehaviorSubject<Task[]>> new BehaviorSubject([]);
     this.tasks = this._tasks.asObservable();
